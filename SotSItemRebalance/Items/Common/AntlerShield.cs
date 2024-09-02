@@ -72,7 +72,7 @@ namespace SotSItemRebalance.Items
         {
             Main.logSource.LogInfo("Applying IL modifications to Antler Shield");
             IL.RoR2.HealthComponent.TakeDamageProcess += new ILContext.Manipulator(IL_OnTakeDamage);
-            SharedHooks.Handle_GetStatCoefficients_Actions += GetStatCoefficients;
+            //SharedHooks.Handle_GetStatCoefficients_Actions += GetStatCoefficients;
         }
 
         private void GetStatCoefficients(CharacterBody sender, RecalculateStatsAPI.StatHookEventArgs args, Inventory inventory)
@@ -93,12 +93,12 @@ namespace SotSItemRebalance.Items
             ILCursor ilcursor = new ILCursor(il);
             if (ilcursor.TryGotoNext(x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "antlerShield"))) {
                 ilcursor.Index += 1;
-                ilcursor.Emit(OpCodes.Ldc_I4_0);
-                ilcursor.Emit(OpCodes.Mul);
+                //ilcursor.Emit(OpCodes.Ldc_I4_0);
+                //ilcursor.Emit(OpCodes.Mul);
             } 
             else
             {
-                UnityEngine.Debug.LogError(MainPlugin.MODNAME + ": Antler Shield IL Hook failed");
+                UnityEngine.Debug.LogError(Main.MODNAME + ": Antler Shield IL Hook failed");
             }
         }
 
