@@ -1,0 +1,1 @@
+Fixes The False Son event on Prime Meridian softlocking with more than 4 players.
