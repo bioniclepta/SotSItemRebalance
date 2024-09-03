@@ -1,6 +1,7 @@
 # TODO
 
-- Remove reflect on antler shield. Transition to a movement speed item (if reflection, throw to red and up some stats?)
+- DONE: Remove reflect on antler shield. Transition to a movement speed item (if reflection, throw to red and up some stats?)
+  - Decide on how to set this apart. armor and movement speed is nice, so maybe keep, but just brainstorm idk
 - Make prayer beads auto scrap/break after a certain level, giving the buffs automatically
 - Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
 - Warped Echo transitions to void item, with some flair that makes it worth picking up (TBD)
