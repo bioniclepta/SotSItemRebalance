@@ -14,6 +14,7 @@
 
 		<PackageReference Include="BepInEx.Core" Version="5.*" />
 		<PackageReference Include="R2API.Language" Version="1.*" />
+		<PackageReference Include="R2API.Items" Version="1.*" />
 		<PackageReference Include="R2API.RecalculateStats" Version="1.*" />
 
 		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" />

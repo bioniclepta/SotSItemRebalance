@@ -5,6 +5,7 @@ using R2API;
 using UnityEngine.AddressableAssets;
 using System.Linq;
 using MonoMod.Cil;
+using Mono.Cecil.Cil;
 
 namespace SotSItemRebalance.Items
 {
@@ -13,21 +14,28 @@ namespace SotSItemRebalance.Items
     //We should probably rework this to our own implementation a bit
     public class AntlerShield
     {
+        //Sets an enable flag. If this class is loaded, then it will be set to true
         internal static bool Enable = true;
+        //Sets the armor and speed of the new antler shields
+        //Armor number is flat
         internal static float StackArmor = 7.5f;
+        //Speed number is a percentage.
         internal static float StackSpeed = 0.07f;
         public AntlerShield()
         {
+            //If the method got called and we didn't initialize, we have an issue
             if (!Enable) { return; }
-            Main.logSource.LogInfo("Changing Antler Shield");
-            ClampConfig();
-            UpdateText();
-            UpdateItemDef();
-            Hooks();
+            //Otherwise we can run the changes
+            Main.logSource.LogInfo("Changing Antler Shield");   //Start by displaying the message
+            ClampConfig();      //Clamp the stats
+            UpdateText();       //Update the item description in game
+            UpdateItemDef();    //Sets the item model, tags, and stuff
+            Hooks();            //Hooks onto base game methods to replace them
         }
 
         private void ClampConfig()
         {
+            //Just making sure numbers don't get messed up ig
             StackArmor = Math.Max(0f, StackArmor);
             StackSpeed = Math.Max(0f, StackSpeed);
         }
@@ -58,11 +66,14 @@ namespace SotSItemRebalance.Items
 
         private void UpdateItemDef()
         {
+            //Loads the original asset from base game
             ItemDef itemDef = Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC2/Items/NegateAttack/NegateAttack.asset").WaitForCompletion();
             if (itemDef)
             {
                 List<ItemTag> itemTags = itemDef.tags.ToList();
+                //Enemies can have this item
                 itemTags.Remove(ItemTag.AIBlacklist);
+                //Mythrix can have this item
                 itemTags.Remove(ItemTag.BrotherBlacklist);
                 itemDef.tags = itemTags.ToArray();
             }
@@ -79,11 +90,12 @@ namespace SotSItemRebalance.Items
         {
             if (sender.inventory)
             {
-                int itemCount = sender.inventory.GetItemCount(DLC2Content.Items.NegateAttack);
-                if (itemCount > 0)
+                //Gets the number of antlers we have, then applies the buffs
+                int antlerCount = sender.inventory.GetItemCount(DLC2Content.Items.NegateAttack);
+                if (antlerCount > 0)
                 {
-                    args.moveSpeedMultAdd += itemCount * StackSpeed;
-                    args.armorAdd += itemCount * StackArmor;
+                    args.moveSpeedMultAdd += antlerCount * StackSpeed;
+                    args.armorAdd += antlerCount * StackArmor;
                 }
             }
         }
@@ -93,8 +105,8 @@ namespace SotSItemRebalance.Items
             ILCursor ilcursor = new ILCursor(il);
             if (ilcursor.TryGotoNext(x => x.MatchLdfld(typeof(HealthComponent.ItemCounts), "antlerShield"))) {
                 ilcursor.Index += 1;
-                //ilcursor.Emit(OpCodes.Ldc_I4_0);
-                //ilcursor.Emit(OpCodes.Mul);
+                ilcursor.Emit(OpCodes.Ldc_I4_0);
+                ilcursor.Emit(OpCodes.Mul);
             } 
             else
             {

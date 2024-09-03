@@ -1,3 +1,4 @@
+using System;
 using BepInEx;
 using BepInEx.Configuration;
 using R2API;
@@ -15,6 +16,7 @@ namespace SotSItemRebalance
 {
     [BepInDependency("com.bepis.r2api")]
     [BepInDependency("com.bepis.r2api.recalculatestats", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInDependency("com.bepis.r2api.items", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.language", BepInDependency.DependencyFlags.HardDependency)]
 
 
@@ -30,18 +32,24 @@ namespace SotSItemRebalance
         internal static BepInEx.Logging.ManualLogSource logSource;
         public static PluginInfo pluginInfo;
 
-        private void awake()
+        private void Awake()
         {
             logSource = this.Logger;
             pluginInfo = Info;
+            Configs.Setup();
             EnableChanges();
-            //SharedHooks.Setup();
-            //GameModeCatalog.availability.CallWhenAvailable(new Action(PostLoad_GameModeCatalog));
+            SharedHooks.Setup();
+            GameModeCatalog.availability.CallWhenAvailable(new Action(PostLoad_GameModeCatalog));
         }
 
         private void EnableChanges()
         {
             new Items.AntlerShield();
+        }
+
+        private void PostLoad_GameModeCatalog()
+        {
+            //Items.DefenseNucleus_Shared.ExtraChanges();
         }
 
     }
