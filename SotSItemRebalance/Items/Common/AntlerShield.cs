@@ -17,8 +17,8 @@ namespace SotSItemRebalance.Items
         //Sets an enable flag. If this class is loaded, then it will be set to true
         internal static bool Enable = true;
         //Sets the armor and speed of the new antler shields
-        //Armor number is flat
-        internal static float StackArmor = 7.5f;
+        //Shield number is what percent of max health to add to shields
+        internal static float StackShield = 2.5f;
         //Speed number is a percentage.
         internal static float StackSpeed = 0.07f;
         public AntlerShield()
@@ -36,7 +36,7 @@ namespace SotSItemRebalance.Items
         private void ClampConfig()
         {
             //Just making sure numbers don't get messed up ig
-            StackArmor = Math.Max(0f, StackArmor);
+            StackShield = Math.Max(0f, StackShield);
             StackSpeed = Math.Max(0f, StackSpeed);
         }
 
@@ -45,10 +45,10 @@ namespace SotSItemRebalance.Items
             Main.logSource.LogInfo("Updating Antler Shield Item Text");
             string pickup = "Slightly increase";
             string desc = "Increases";
-            if (StackArmor > 0f)
+            if (StackShield > 0f)
             {
-                pickup += " armor";
-                desc += string.Format(" <style=cIsHealing>armor</style> by <style=cIsHealing>{0}</style> <style=cStack>(+{0} per stack)</style>", StackArmor);
+                pickup += " shield";
+                desc += string.Format(" <style=cIsUtility>armor</style> by <style=cIsUtility>{0}</style> <style=cStack>(+{0} per stack)</style>", StackShield);
                 if(StackSpeed > 0f)
                 {
                     pickup += " and";
@@ -94,8 +94,11 @@ namespace SotSItemRebalance.Items
                 int antlerCount = sender.inventory.GetItemCount(DLC2Content.Items.NegateAttack);
                 if (antlerCount > 0)
                 {
+                    //Adds to the movement speed multiplier (this will scale on level up)
                     args.moveSpeedMultAdd += antlerCount * StackSpeed;
-                    args.armorAdd += antlerCount * StackArmor;
+                    //Adds shield equal to a percent of max HP (TODO)
+                    //Probably get max hp, scale it to the percent, then add to base shield
+                    args.baseShieldAdd += antlerCount * StackShield;
                 }
             }
         }

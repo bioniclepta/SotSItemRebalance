@@ -56,7 +56,7 @@ namespace SotSItemRebalance
         private static void Read_AntlerShield()
         {
             AntlerShield.Enable = ItemConfig.Bind(Section_AntlerShield_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
-            AntlerShield.StackArmor = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Armor", 7.5f, "Armor each stack gives.").Value;
+            AntlerShield.StackShield = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Armor", 7.5f, "Armor each stack gives.").Value;
             AntlerShield.StackSpeed = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Movement Speed", 0.07f, "Movement speed each stack gives.").Value;
         }
     }
