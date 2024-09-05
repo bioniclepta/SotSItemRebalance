@@ -22,4 +22,13 @@
 		<PackageReference Include="MMHOOK.RoR2" Version="2024.8.28" NoWarn="NU1701" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Items\3. Legendary\" />
+	  <Folder Include="Items\2. Uncommon\" />
+	  <Folder Include="Items\4. Boss\" />
+	  <Folder Include="Items\5. Lunar\" />
+	  <Folder Include="Items\6. Void\" />
+	  <Folder Include="Items\7. Equipment\" />
+	</ItemGroup>
+
 </Project>

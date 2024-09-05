@@ -44,7 +44,9 @@ namespace SotSItemRebalance
 
         private void EnableChanges()
         {
+            //Common
             new Items.AntlerShield();
+            new Items.BisonSteak();
         }
 
         private void PostLoad_GameModeCatalog()

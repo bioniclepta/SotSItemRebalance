@@ -20,6 +20,7 @@ namespace SotSItemRebalance
 
         //Defines the item section labels
         private const string Section_AntlerShield_Buff = "Antler Shield";
+        private const string Section_BisonSteak_Buff = "Bison Steak";
 
         //Defines the labels
         private const string Label_EnableBuff = "Enable Changes";
@@ -56,8 +57,15 @@ namespace SotSItemRebalance
         private static void Read_AntlerShield()
         {
             AntlerShield.Enable = ItemConfig.Bind(Section_AntlerShield_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
-            AntlerShield.StackShield = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Armor", 7.5f, "Armor each stack gives.").Value;
+            AntlerShield.StackShield = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Shield", 0.05f, "Shield each stack gives.").Value;
             AntlerShield.StackSpeed = ItemConfig.Bind(Section_AntlerShield_Buff, "Stack Movement Speed", 0.07f, "Movement speed each stack gives.").Value;
+        }
+
+        private static void Read_BisonSteak()
+        {
+            BisonSteak.Enable = ItemConfig.Bind(Section_BisonSteak_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
+            BisonSteak.StackHealth = ItemConfig.Bind(Section_BisonSteak_Buff, "Stack Health", 0.05f, "Health each stack gives.").Value;
+            BisonSteak.StackAttackDamage = ItemConfig.Bind(Section_BisonSteak_Buff, "Stack Attack Damage", 0.015f, "Attack damage each stack gives.").Value;
         }
     }
 }

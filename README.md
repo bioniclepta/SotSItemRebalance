@@ -1,7 +1,7 @@
 # TODO
 
 - DONE: Remove reflect on antler shield. Transition to a movement speed item (if reflection, throw to red and up some stats?)
-  - Add shield and movement speed
+  - DONE: Add shield and movement speed
 - Make prayer beads auto scrap/break after a certain level, giving the buffs automatically
 - Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
 - Warped Echo transitions to a green, 5% chance on hit (+5% per item, maybe scaling logarithmically) to apply another stack of a debuff an enemy has
