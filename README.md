@@ -2,6 +2,7 @@
 
 - DONE: Remove reflect on antler shield. Transition to a movement speed item (if reflection, throw to red and up some stats?)
   - DONE: Add shield and movement speed
+- DONE: Changed bison steak to slightly increase health and damage based on max health such to be a scaleable white item without making it busted enough to move to green
 - Make prayer beads auto scrap/break after a certain level, giving the buffs automatically
 - Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
 - Warped Echo transitions to a green, 5% chance on hit (+5% per item, maybe scaling logarithmically) to apply another stack of a debuff an enemy has
