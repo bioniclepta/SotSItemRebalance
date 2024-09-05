@@ -5,6 +5,12 @@
 		<LangVersion>preview</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Remove="libs\**" />
+		<EmbeddedResource Remove="libs\**" />
+		<None Remove="libs\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
@@ -23,12 +29,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Reference Include="LookingGlass">
+			<HintPath>libs\LookingGlass.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="Items\3. Legendary\" />
 	  <Folder Include="Items\2. Uncommon\" />
 	  <Folder Include="Items\4. Boss\" />
 	  <Folder Include="Items\5. Lunar\" />
 	  <Folder Include="Items\6. Void\" />
 	  <Folder Include="Items\7. Equipment\" />
+	  <Folder Include="libs\" />
 	</ItemGroup>
 
 </Project>

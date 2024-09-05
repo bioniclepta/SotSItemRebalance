@@ -117,6 +117,5 @@ namespace SotSItemRebalance.Items
                 UnityEngine.Debug.LogError(Main.MODNAME + ": Antler Shield IL Hook failed");
             }
         }
-
     }
 }
