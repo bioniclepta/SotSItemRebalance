@@ -9,19 +9,27 @@ using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
 using System.Security;
 using System.Security.Permissions;
+using MonoMod.RuntimeDetour;
+using MonoMod.ModInterop;
+using SotSItemRebalance.Integration;
 
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
 namespace SotSItemRebalance
 {
+    //Mod information
+    [BepInPlugin(MODUID, MODNAME, MODVERSION)]
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
+
+    //Hard Dependencies
     [BepInDependency("com.bepis.r2api")]
     [BepInDependency("com.bepis.r2api.recalculatestats", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.items", BepInDependency.DependencyFlags.HardDependency)]
     [BepInDependency("com.bepis.r2api.language", BepInDependency.DependencyFlags.HardDependency)]
 
-
-    [BepInPlugin(MODUID, MODNAME, MODVERSION)]
-    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
+    //Soft Dependencies
+    [BepInDependency(LookingGlass.PluginInfo.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
+    
     public class Main : BaseUnityPlugin
     {
 
@@ -44,12 +52,16 @@ namespace SotSItemRebalance
 
         private void EnableChanges()
         {
+            //Common
             new Items.AntlerShield();
+            new Items.BisonSteak();
+            new Items.WarpedEcho();
         }
 
         private void PostLoad_GameModeCatalog()
         {
             //Items.DefenseNucleus_Shared.ExtraChanges();
+           LookingGlassIntegration.init();
         }
 
     }
