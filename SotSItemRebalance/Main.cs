@@ -55,6 +55,7 @@ namespace SotSItemRebalance
             //Common
             new Items.AntlerShield();
             new Items.BisonSteak();
+            new Items.WarpedEcho();
         }
 
         private void PostLoad_GameModeCatalog()

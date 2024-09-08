@@ -11,6 +11,14 @@
 		<EmbeddedResource Remove="libs\**" />
 		<None Remove="libs\**" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Remove="assetbundles\greenwarpedechobundle" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <EmbeddedResource Include="assetbundles\greenwarpedechobundle" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
