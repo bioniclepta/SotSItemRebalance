@@ -22,6 +22,7 @@ namespace SotSItemRebalance
         private const string Section_AntlerShield_Buff = "Antler Shield";
         private const string Section_BisonSteak_Buff = "Bison Steak";
         private const string Section_WarpedEcho_Buff = "Warped Echo";
+        private const string Section_SonorousWhispers_Buff = "Sonorous Whispers";
 
         //Defines the labels
         private const string Label_EnableBuff = "Enable Changes";
@@ -45,6 +46,7 @@ namespace SotSItemRebalance
 
             //Legendary
             Read_ShatteringJustice();
+            Read_SonorousWhispers();
             //Boss
 
             //Void
@@ -80,6 +82,13 @@ namespace SotSItemRebalance
         private static void Read_ShatteringJustice()
         {
             //Does nothing, but for the sake of consistency it's here
+        }
+
+        private static void Read_SonorousWhispers()
+        {
+            SonorousWhispers.Enable = ItemConfig.Bind(Section_SonorousWhispers_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
+            SonorousWhispers.NeutralDropChance = ItemConfig.Bind(Section_SonorousWhispers_Buff, "Proc Chance", 0.2f, "Proc chance each stack gives.").Value;
+            SonorousWhispers.NeutralItemDropCount = ItemConfig.Bind(Section_SonorousWhispers_Buff, "Neutral Items Dropped", 5, "The stacking number of items a neutral creature will drop.").Value;
         }
     }
 }
