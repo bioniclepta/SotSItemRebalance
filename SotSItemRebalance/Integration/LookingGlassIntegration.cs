@@ -132,6 +132,30 @@ namespace SotSItemRebalance.Integration
 
                 //Bolstering Lantern
 
+
+                // GREEN ITEMS
+
+                // RED ITEMS
+
+                //Shattering Justice
+                if (ShatteringJustice.Enable)
+                {
+                    //Removes the Looking Glass Implementation
+                    ItemDefinitions.allItemDefinitions.Remove((int)RoR2Content.Items.ArmorReductionOnHit.itemIndex);
+                    //Re-adds the definition with our new stat tracking
+                    Main.logSource.LogInfo("Changing Looking Glass Implementation of: Shattering Justice");
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Max HP Reduction: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValuesNew = (luck, stackCount, procChance) =>
+                    {
+                        List<float> values = new();
+                        values.Add(0.01f * stackCount);
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)RoR2Content.Items.ArmorReductionOnHit.itemIndex, stats);
+                }
                 //...
             }
         }
