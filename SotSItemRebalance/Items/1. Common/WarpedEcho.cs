@@ -79,9 +79,26 @@ namespace SotSItemRebalance.Items
         private void Hooks()
         {
             Main.logSource.LogInfo("Applying IL modifications to Warped Echo");
-            //Zero out warped echo entierely (TODO)
-            //IL.RoR2.CharacterBody.RecalculateStats += new ILContext.Manipulator(IL_RecalculateStats);
+            IL.RoR2.CharacterBody.DoItemUpdates += new ILContext.Manipulator(IL_DoItemUpdates);
             SharedHooks.Handle_GlobalHitEvent_Actions += GetGlobalHitEvent;
+        }
+
+        private void IL_DoItemUpdates(ILContext il)
+        {
+            ILCursor ilcursor = new ILCursor(il);
+            //In the DoItemUpdates, we completely remove the calls to update anything regarding the original echo
+            if (ilcursor.TryGotoNext(
+                x => x.MatchCall("RoR2.CharacterBody", "UpdateLowerHealthHigherDamage")
+                ))
+            {
+                ilcursor.Index += 1;
+                //wipe the records clean and start anew
+                ilcursor.RemoveRange(6);
+            }
+            else
+            {
+                UnityEngine.Debug.LogError(Main.MODNAME + ": Warped Echo IL Hook failed");
+            }
         }
 
         private void GetGlobalHitEvent(CharacterBody victim, CharacterBody attacker, DamageInfo damageInfo)
@@ -90,39 +107,41 @@ namespace SotSItemRebalance.Items
             //checks if the attacker has an echo on them and if the enemy has any stackable debuffs
             bool victimHasStackableDebuff = false;
             bool victimHasDOT = false;
-
+            //Fist check if we have any echos to save compute time
             if (echoCount > 0)
             {
+                //gets the DOT controller of the victim
                 DotController dotController = DotController.FindDotController(victim.gameObject);
 
                 if ((bool)dotController)
                 {
+                    //Then loop through all dots and check if the enemy has any active
                     for (DotController.DotIndex dotIndex = DotController.DotIndex.Bleed; dotIndex < DotController.DotIndex.Count; dotIndex++)
                     {
                         if (dotController.HasDotActive(dotIndex))
                         {
                             victimHasDOT = true;
+                            //Once we verify that the enemy has a DOT, we're good
+                            //Also a nice perk is that an enemy is most likely to have burn or bleed which are indexes 0 or 1
+                            //So the loop will break very early 90% of the time
                             break;
                         }
-                        //choose randomly to apply either dot or debuff
-                        //check if there is dot AND debuff, otherwise choose the one available
-                        //then add the chosen one
                     }
                 }
-
+                //Then we do the same thing for buffs (ROR2 doesn't differentiate between buffs/debuffs)
                 foreach (BuffIndex enemyBuff in victim.activeBuffsList)
                 {
                     BuffDef enemyBuffDef = BuffCatalog.GetBuffDef(enemyBuff);
                     bool isBuffStackable = enemyBuffDef.canStack;
                     bool isDebuff = enemyBuffDef.isDebuff;
-
+                    //We need to check if the buff an enemy has is a DE-buff and stackable. Can't be buffing enemies with our items
                     if (isBuffStackable && isDebuff)
                     {
                         victimHasStackableDebuff = true;
                         break;
                     }
                 }
-
+                //If we have either DOT or debuff, we can roll to see if we proc
                 if (victimHasStackableDebuff || victimHasDOT)
                 {
                     bool echoProced = RoR2.Util.CheckRoll(procChance * echoCount, attacker.master.luck ,attacker.master);
@@ -139,10 +158,9 @@ namespace SotSItemRebalance.Items
 
         private static void AddAnotherDebuffStack(CharacterBody victim, CharacterBody attacker, bool hasdebuff, bool hasDOT)
         {
-            int numDebuffs = 0;
-            int numDOTs = 0;
+            //Create a buffindex list to store our found active buffs
             List<BuffIndex> activeDebuffs = new List<BuffIndex>();
-
+            //Checks to see if we can fail fast past these
             if (hasdebuff)
             {
                 BuffIndex[] debuffIndeces = RoR2.BuffCatalog.debuffBuffIndices;
@@ -158,6 +176,7 @@ namespace SotSItemRebalance.Items
                     }
                 }
             }
+            //Same premise for DOTS
             List<DotIndex> activeDOTs = new List<DotIndex>();
             if (hasDOT)
             {
@@ -176,8 +195,8 @@ namespace SotSItemRebalance.Items
      
             }
 
-            numDebuffs = activeDebuffs.ToArray().Length;
-            numDOTs = activeDOTs.ToArray().Length;
+            int numDebuffs = activeDebuffs.ToArray().Length;
+            int numDOTs = activeDOTs.ToArray().Length;
             if(numDebuffs == 0)
             {
                 int DOTToAdd = new System.Random().Next(0, numDOTs);
