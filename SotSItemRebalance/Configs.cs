@@ -21,6 +21,7 @@ namespace SotSItemRebalance
         //Defines the item section labels
         private const string Section_AntlerShield_Buff = "Antler Shield";
         private const string Section_BisonSteak_Buff = "Bison Steak";
+        private const string Section_WarpedEcho_Buff = "Warped Echo";
 
         //Defines the labels
         private const string Label_EnableBuff = "Enable Changes";
@@ -38,6 +39,8 @@ namespace SotSItemRebalance
             ItemConfig = new ConfigFile(System.IO.Path.Combine(ConfigFolderPath, $"Items.cfg"), true);
             //Common
             Read_AntlerShield();
+            Read_BisonSteak();
+            Read_WarpedEcho();
             //Uncommon
 
             //Legendary
@@ -66,6 +69,12 @@ namespace SotSItemRebalance
             BisonSteak.Enable = ItemConfig.Bind(Section_BisonSteak_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
             BisonSteak.StackHealth = ItemConfig.Bind(Section_BisonSteak_Buff, "Stack Health", 0.05f, "Health each stack gives.").Value;
             BisonSteak.StackAttackDamage = ItemConfig.Bind(Section_BisonSteak_Buff, "Stack Attack Damage", 0.015f, "Attack damage each stack gives.").Value;
+        }
+
+        private static void Read_WarpedEcho()
+        {
+            WarpedEcho.Enable = ItemConfig.Bind(Section_WarpedEcho_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
+            WarpedEcho.procChance = ItemConfig.Bind(Section_WarpedEcho_Buff, "Proc Chance", 0.05f, "Proc chance each stack gives.").Value;
         }
     }
 }
