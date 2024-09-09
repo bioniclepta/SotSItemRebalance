@@ -156,6 +156,34 @@ namespace SotSItemRebalance.Integration
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)RoR2Content.Items.ArmorReductionOnHit.itemIndex, stats);
                 }
+
+                //Sonorous Whispers
+                if (SonorousWhispers.Enable)
+                {
+                    //Removes the Looking Glass Implementation
+                    ItemDefinitions.allItemDefinitions.Remove((int)DLC2Content.Items.ResetChests.itemIndex);
+                    //Re-adds the definition with our new stat tracking
+                    Main.logSource.LogInfo("Changing Looking Glass Implementation of: Shattering Justice");
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Neutral Drop Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Neutral Items Dropped: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValuesNew = (luck, stackCount, procChance) =>
+                    {
+                        float dropChance = (SonorousWhispers.NeutralDropChance * 100) * stackCount;
+                        float clampedChance = (dropChance <= 0f) ? 0f : (dropChance > 100f) ? 100f : dropChance;
+                        List<float> values = new();
+                        //Dividing by 100 again because it makes my brain happy when percents are out of 100 instead of 1
+                        //LookingGlass multiplies by 100 when converting to % so we divide
+                        values.Add(clampedChance / 100);
+                        values.Add(SonorousWhispers.NeutralItemDropCount * stackCount);
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)DLC2Content.Items.ResetChests.itemIndex, stats);
+                }
                 //...
             }
         }

@@ -8,9 +8,9 @@
 - DONE: Make these changes work with LookingGlass mod (checks if it is installed, then fixes item descriptions)
 - DONE: Warped Echo transitions to a green, 5% chance on hit (+5% per item, maybe scaling logarithmically) to apply another stack of a debuff an enemy has
 - DONE: Shatering justice now gives permanent curse effect, instead of decreasing armor, decreases max HP
+- DONE: Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
+  - There is a little secret too that makes it very OP again under (hopefully) 1 circumstance :)
 - Make prayer beads auto scrap/break after a certain level, giving the buffs automatically
-- Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
-  - This is a maybe change now, need to see how the nerfed version in the newest patch works
 - Knockback fin knocks back instead of up for ground enemies, and down for flying enemies
 - Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
 - Warped Echo transitions to void item, with some flair that makes it worth picking up (TBD)

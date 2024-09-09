@@ -57,8 +57,10 @@ namespace SotSItemRebalance
             new Items.BisonSteak();
             new Items.WarpedEcho();
             //Uncommon (Green)
+
             //Legendary (Red)
             new Items.ShatteringJustice();
+            new Items.SonorousWhispers();
         }
 
         private void PostLoad_GameModeCatalog()
