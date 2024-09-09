@@ -52,10 +52,13 @@ namespace SotSItemRebalance
 
         private void EnableChanges()
         {
-            //Common
+            //Common (White)
             new Items.AntlerShield();
             new Items.BisonSteak();
             new Items.WarpedEcho();
+            //Uncommon (Green)
+            //Legendary (Red)
+            new Items.ShatteringJustice();
         }
 
         private void PostLoad_GameModeCatalog()

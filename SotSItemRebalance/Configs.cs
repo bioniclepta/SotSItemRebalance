@@ -44,7 +44,7 @@ namespace SotSItemRebalance
             //Uncommon
 
             //Legendary
-
+            Read_ShatteringJustice();
             //Boss
 
             //Void
@@ -75,6 +75,11 @@ namespace SotSItemRebalance
         {
             WarpedEcho.Enable = ItemConfig.Bind(Section_WarpedEcho_Buff, Label_EnableBuff, true, Desc_EnableBuff).Value;
             WarpedEcho.procChance = ItemConfig.Bind(Section_WarpedEcho_Buff, "Proc Chance", 0.05f, "Proc chance each stack gives.").Value;
+        }
+
+        private static void Read_ShatteringJustice()
+        {
+            //Does nothing, but for the sake of consistency it's here
         }
     }
 }

@@ -44,7 +44,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Items\3. Legendary\" />
 	  <Folder Include="Items\2. Uncommon\" />
 	  <Folder Include="Items\4. Boss\" />
 	  <Folder Include="Items\5. Lunar\" />
