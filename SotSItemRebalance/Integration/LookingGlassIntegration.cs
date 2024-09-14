@@ -163,7 +163,7 @@ namespace SotSItemRebalance.Integration
                     //Removes the Looking Glass Implementation
                     ItemDefinitions.allItemDefinitions.Remove((int)DLC2Content.Items.ResetChests.itemIndex);
                     //Re-adds the definition with our new stat tracking
-                    Main.logSource.LogInfo("Changing Looking Glass Implementation of: Shattering Justice");
+                    Main.logSource.LogInfo("Changing Looking Glass Implementation of: Sonorous Whispers");
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Neutral Drop Chance: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);

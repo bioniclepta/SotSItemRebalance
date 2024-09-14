@@ -1,7 +1,7 @@
 ﻿{
-	"name": "FalseSonMaxPlayersFix",
+	"name": "SotSItemRebalance",
 	"version_number": "1.0.0",
-	"website_url": "https://github.com/bioniclepta/FalseSonMaxPlayersFix/tree/main",
+	"website_url": "https://github.com/bioniclepta/SotSItemRebalance",
 	"description": "Fixes The False Son event on Prime Meridian softlocking with more than 4 players.",
 	"dependencies": [
 		"bbepis-BepInExPack-5.4.2108",
