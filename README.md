@@ -15,7 +15,9 @@
 - Sonourous Whispers remove elite condition for dropping items, instead make it non TP bosses
 - Warped Echo transitions to void item, with some flair that makes it worth picking up (TBD)
 - Knockback fin knocks back instead of up
-- War bonds goes from red to green, giving a small chests worth of money at the start of the stage, and granting 5% (+5% for each item) more gold on kill
+- War bonds now has 2 variations:
+  - If bigger bazaar installed: players can now buy 1 more item (+1 per stack) from the bigger bazaar
+  - If not installed: Upon entering the bazaar, drop a free item, rarity scales with number of stacks
 - Bolstering lantern grants more movement speed while below 50% health
 - Unstable Transmitter explosion stuns for 5 seconds instead of teleporting and explosion radius is bigger (maybe scale radius with more items?)
 - Sale Start seems strong. TBD on fix, but I'd like it to not spew 5 items out of every chest
@@ -26,3 +28,4 @@
 - Warped Echo transitions to void item, with some flair that makes it worth picking up (TBD)
 - Either noxious thorns or shattering justice apply the malachite debuff (or a custom one that limits healing instead of removing it) for a short duration.
   - This would help deal with the healing elites and dunestriders early game
+- War bonds goes from red to green, giving a small chests worth of money at the start of the stage, and granting 5% (+5% for each item) more gold on kill

@@ -37,14 +37,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Reference Include="BiggerBazaar">
+		  <HintPath>libs\BiggerBazaar.dll</HintPath>
+		  <Private>True</Private>
+		</Reference>
 		<Reference Include="LookingGlass">
 			<HintPath>libs\LookingGlass.dll</HintPath>
 			<Private>True</Private>
 		</Reference>
+		<Reference Include="ShareSuite">
+		  <HintPath>libs\ShareSuite.dll</HintPath>
+		  <Private>True</Private>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Items\2. Uncommon\" />
 	  <Folder Include="Items\4. Boss\" />
 	  <Folder Include="Items\5. Lunar\" />
 	  <Folder Include="Items\6. Void\" />

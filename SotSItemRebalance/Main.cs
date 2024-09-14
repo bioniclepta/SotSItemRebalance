@@ -45,6 +45,8 @@ namespace SotSItemRebalance
             logSource = this.Logger;
             pluginInfo = Info;
             Configs.Setup();
+            BiggerBazaarIntegration.init();
+            ShareSuiteIntegration.init();
             EnableChanges();
             SharedHooks.Setup();
             GameModeCatalog.availability.CallWhenAvailable(new Action(PostLoad_GameModeCatalog));
@@ -57,16 +59,19 @@ namespace SotSItemRebalance
             new Items.BisonSteak();
             new Items.WarpedEcho();
             //Uncommon (Green)
+            new Items.PrayerBeads();
 
             //Legendary (Red)
             new Items.ShatteringJustice();
             new Items.SonorousWhispers();
+            //Needs work before release
+            //new Items.WarBonds();
         }
 
         private void PostLoad_GameModeCatalog()
         {
             //Items.DefenseNucleus_Shared.ExtraChanges();
-           LookingGlassIntegration.init();
+            LookingGlassIntegration.init();
         }
 
     }

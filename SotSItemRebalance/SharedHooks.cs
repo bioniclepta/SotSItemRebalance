@@ -27,6 +27,9 @@ namespace SotSItemRebalance
 
         public delegate void Handle_GlobalInventoryChangedEvent(CharacterBody self);
         public static Handle_GlobalInventoryChangedEvent Handle_GlobalInventoryChangedEvent_Actions;
+
+        public delegate void Handle_OnServerStageBegin(CharacterMaster master, Stage stage);
+        public static Handle_OnServerStageBegin Handle_OnServerStageBegin_Actions;
         public static void Setup()
         {
             if (Handle_GetStatCoefficients_Actions != null)
@@ -52,6 +55,10 @@ namespace SotSItemRebalance
             if (Handle_CharacterMaster_OnBodyDeath_Actions != null)
             {
                 On.RoR2.CharacterMaster.OnBodyDeath += CharacterMaster_OnBodyDeath;
+            }
+            if (Handle_OnServerStageBegin_Actions != null)
+            {
+                On.RoR2.CharacterMaster.OnServerStageBegin += CharacterMaster_OnServerStageBegin;
             }
         }
 
@@ -123,5 +130,15 @@ namespace SotSItemRebalance
             }
             Handle_GlobalInventoryChangedEvent_Actions.Invoke(self);
         }
+
+        internal static void CharacterMaster_OnServerStageBegin(On.RoR2.CharacterMaster.orig_OnServerStageBegin orig, CharacterMaster self, Stage stage)
+        {
+            //orig(self, stage);
+            if (!NetworkServer.active)
+            {
+                return;
+            }
+            Handle_OnServerStageBegin_Actions.Invoke(self, stage);
+        } 
     }
 }
